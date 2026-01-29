@@ -21,6 +21,15 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    fallback: {
+      // Chart.js compatibility for browser extension environment
+      'canvas': false,
+      // jsPDF compatibility for browser extension
+      'crypto': false,
+      'stream': false,
+      'util': false,
+      'buffer': false,
+    },
   },
   output: {
     filename: '[name].js',
@@ -32,7 +41,8 @@ module.exports = {
       patterns: [
         { from: 'manifest.json', to: 'manifest.json' },
         { from: 'src/popup.html', to: 'popup.html' },
-        { from: 'src/popup.css', to: 'popup.css' }
+        { from: 'src/popup.css', to: 'popup.css' },
+        { from: 'src/assets', to: 'assets' }
       ],
     }),
   ],

@@ -135,14 +135,16 @@ export class NFREvaluator {
 
     const averageScore = Math.round(totalScore / results.length);
 
-    // Determine overall status based on worst result
+    // Determine overall status based on composite score and individual results
     let overallStatus: HealthStatus;
-    if (failCount > 0) {
+    if (failCount > 0 || averageScore < 50) {
       overallStatus = 'FAIL';
-    } else if (warnCount > 0) {
-      overallStatus = 'WARN';
-    } else {
+    } else if (averageScore >= 70) {
+      // Good performance - even if some metrics are WARN, overall score is good
       overallStatus = 'PASS';
+    } else {
+      // Score between 50-69 or has warnings
+      overallStatus = 'WARN';
     }
 
     // Identify worst offenders (FAIL and WARN results)

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Task completion monitor for Page Health Analyzer
+ * Task completion monitor for Blackbox
  * Monitors tasks.md for completed tasks and triggers version bump
  */
 

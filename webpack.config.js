@@ -17,6 +17,15 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    fallback: {
+      // Chart.js compatibility for browser environments
+      'canvas': false,
+      // jsPDF compatibility
+      'crypto': false,
+      'stream': false,
+      'util': false,
+      'buffer': false,
+    },
   },
   output: {
     filename: 'bundle.js',

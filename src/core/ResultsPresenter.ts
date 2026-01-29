@@ -340,11 +340,11 @@ export class ResultsPresenter {
   private getStatusText(status: string): string {
     switch (status) {
       case 'PASS':
-        return 'Excellent Performance';
+        return 'Good Performance';
       case 'WARN':
-        return 'Performance Issues Detected';
+        return 'Fair Performance';
       case 'FAIL':
-        return 'Critical Performance Problems';
+        return 'Poor Performance';
       default:
         return 'Unknown Status';
     }

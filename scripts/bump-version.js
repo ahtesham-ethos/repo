@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Auto-increment version script for Page Health Analyzer extension
+ * Auto-increment version script for Blackbox extension
  * This script increments the patch version in manifest.json and rebuilds the extension
  */
 

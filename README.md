@@ -1,4 +1,4 @@
-# Page Health & NFR Analysis Tool
+# Blackbox - Performance Analysis Tool
 
 A lightweight browser-based tool for analyzing webpage performance health against configurable Non-Functional Requirements (NFRs).
 
@@ -53,7 +53,7 @@ src/
 
 ### Injectable Script
 1. Build the script: `npm run build:script`
-2. Copy `dist/script/page-health-analyzer.js` to your project
+2. Copy `dist/script/blackbox.js` to your project
 3. Inject and run in browser console
 
 ## License

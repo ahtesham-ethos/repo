@@ -1,7 +1,7 @@
 import { PageHealthAnalyzer } from './core/PageHealthAnalyzer';
 
 /**
- * Content script for the Page Health Analyzer extension
+ * Content script for the Blackbox extension
  * This script runs in the context of web pages and provides analysis capabilities
  */
 class ContentScriptAnalyzer {
@@ -11,7 +11,7 @@ class ContentScriptAnalyzer {
   constructor() {
     this.analyzer = new PageHealthAnalyzer();
     this.setupMessageListener();
-    console.log('Page Health Analyzer content script loaded');
+    console.log('Blackbox content script loaded');
   }
 
   /**

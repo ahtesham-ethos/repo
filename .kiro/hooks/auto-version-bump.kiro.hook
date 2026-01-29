@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "name": "Auto Version Bump",
+  "description": "Automatically increments the version number in manifest.json when code files are edited or agent tasks complete",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "node scripts/bump-version.js"
+  },
+  "workspaceFolderName": "repo",
+  "shortName": "auto-version-bump"
+}

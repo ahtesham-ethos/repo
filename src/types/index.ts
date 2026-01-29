@@ -119,3 +119,6 @@ export interface AllMetrics {
   rendering: RenderingMetrics;
   network: NetworkMetrics;
 }
+
+// Re-export Phase 2 types
+export * from './phase2';
