@@ -1,0 +1,339 @@
+body {
+  width: 400px;
+  min-height: 300px;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  background: #f8f9fa;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  background: #2563eb;
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+main {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+footer {
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background: #f3f4f6;
+}
+
+button:active {
+  background: #e5e7eb;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  color: #6b7280;
+  padding: 32px;
+}
+
+.health-status {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.health-status .status-badge {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.health-status .status-text {
+  flex: 1;
+}
+
+.health-status .status-title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.health-status .status-score {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.health-status.pass {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.health-status.warn {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.health-status.fail {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.metrics-section {
+  margin-bottom: 16px;
+}
+
+.metrics-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.metric:last-child {
+  border-bottom: none;
+}
+
+.metric-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.metric-value {
+  color: #6b7280;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  font-size: 13px;
+}
+
+.metric-unavailable {
+  color: #9ca3af;
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+}
+
+.worst-offenders {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.worst-offenders h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.offender {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  background: #f9fafb;
+  border-radius: 4px;
+  border-left: 3px solid #e5e7eb;
+}
+
+/* Configuration Panel Styles */
+.config-panel {
+  padding: 0;
+}
+
+.config-panel h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+}
+
+.config-section {
+  margin-bottom: 16px;
+}
+
+.config-section label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #374151;
+  font-size: 13px;
+}
+
+.config-section input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.config-section input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.config-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.config-actions button {
+  flex: none;
+  padding: 10px 16px;
+  font-weight: 500;
+}
+
+.config-actions #save-config {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.config-actions #save-config:hover {
+  background: #1d4ed8;
+}
+
+.config-actions #reset-config {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+}
+
+.config-actions #reset-config:hover {
+  background: #b91c1c;
+}
+
+.config-actions #back-to-results {
+  background: #6b7280;
+  color: white;
+  border-color: #6b7280;
+}
+
+.config-actions #back-to-results:hover {
+  background: #4b5563;
+}
+
+/* Responsive adjustments */
+@media (max-width: 450px) {
+  body {
+    width: 350px;
+  }
+  
+  .health-status .status-badge {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  
+  .health-status .status-title {
+    font-size: 14px;
+  }
+  
+  main {
+    padding: 12px;
+  }
+  
+  footer {
+    padding: 12px;
+  }
+}
+
+/* Animation for loading state */
+.loading {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Success animation for save button */
+.config-actions button.success {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+}
+
+/* Error states */
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+/* Scrollbar styling for webkit browsers */
+main::-webkit-scrollbar {
+  width: 6px;
+}
+
+main::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

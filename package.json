@@ -1,0 +1,41 @@
+{
+  "name": "page-health-analyzer",
+  "version": "1.0.0",
+  "description": "A lightweight browser-based tool for analyzing webpage performance health against NFR thresholds",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "build:extension": "webpack --config webpack.extension.config.js --mode=production",
+    "build:script": "webpack --config webpack.script.config.js --mode=production",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "webpack --mode=development --watch",
+    "bump-version": "node scripts/bump-version.js",
+    "check-tasks": "node scripts/task-completion-monitor.js"
+  },
+  "keywords": [
+    "performance",
+    "web-vitals",
+    "browser-extension",
+    "nfr",
+    "page-health"
+  ],
+  "author": "Hackathon Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.24",
+    "copy-webpack-plugin": "^12.0.2",
+    "fast-check": "^3.15.1",
+    "html-webpack-plugin": "^5.6.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "ts-jest": "^29.1.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}

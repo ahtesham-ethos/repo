@@ -1,0 +1,14 @@
+{
+  "name": "Auto Version Bump on Task Completion",
+  "description": "Automatically increments extension version when tasks are completed",
+  "trigger": {
+    "type": "file_save",
+    "file": ".kiro/specs/page-health-analyzer/tasks.md"
+  },
+  "action": {
+    "type": "shell_command",
+    "command": "npm run check-tasks",
+    "workingDirectory": "."
+  },
+  "enabled": true
+}
