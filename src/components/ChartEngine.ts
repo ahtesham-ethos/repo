@@ -778,10 +778,10 @@ export class ChartControls {
     const controlsContainer = document.createElement('div');
     controlsContainer.className = 'blackbox-chart-controls';
     controlsContainer.innerHTML = `
-      <button class="blackbox-chart-toggle-btn" id="toggle-charts">
-        <span class="blackbox-btn-icon">📊</span>
-        <span class="blackbox-btn-text">Show Graphs</span>
-      </button>
+      // <button class="blackbox-chart-toggle-btn" id="toggle-charts">
+      //   <span class="blackbox-btn-icon">📊</span>
+      //   <span class="blackbox-btn-text">Show Graphs</span>
+      // </button>
     `;
 
     const toggleBtn = controlsContainer.querySelector('#toggle-charts') as HTMLButtonElement;

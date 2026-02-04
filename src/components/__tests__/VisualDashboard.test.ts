@@ -670,7 +670,7 @@ describe('VisualDashboard', () => {
       
       expect(generateReportBtn).toBeTruthy();
       expect(noIssuesMessage).toBeTruthy();
-      expect(noIssuesMessage?.textContent).toContain('No performance issues detected');
+      expect(noIssuesMessage?.textContent).toContain('All metrics within acceptable thresholds');
     });
 
     it('should handle generate report button clicks', async () => {

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Blackbox",
-  "version": "2.0.17",
+  "version": "2.0.21",
   "description": "Professional webpage performance analysis tool",
   "icons": {
     "16": "assets/logo.png",

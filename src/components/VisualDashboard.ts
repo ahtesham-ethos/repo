@@ -1,4 +1,4 @@
-/**
+﻿/**
  * VisualDashboard - Enhanced popup interface with expandable capabilities
  * 
  * This class provides the main user interface for Blackbox Phase 2, featuring
@@ -1542,13 +1542,20 @@ export class VisualDashboard implements IVisualDashboard {
    * Render issues section with report generation controls
    */
   private renderIssuesSection(): string {
-    if (!this.currentHealth || !this.currentHealth.worstOffenders || this.currentHealth.worstOffenders.length === 0) {
+    // Check if there are no issues or only the positive message
+    const hasNoIssues = !this.currentHealth || 
+                       !this.currentHealth.worstOffenders || 
+                       this.currentHealth.worstOffenders.length === 0 ||
+                       (this.currentHealth.worstOffenders.length === 1 && 
+                        this.currentHealth.worstOffenders[0] === 'All metrics within acceptable thresholds');
+
+    if (hasNoIssues) {
       return `
         <div class="blackbox-issues-section">
           <h3 class="blackbox-section-title">Analysis Complete</h3>
           <div class="blackbox-no-issues">
             <span class="blackbox-success-icon">✅</span>
-            <span class="blackbox-success-text">No performance issues detected</span>
+            <span class="blackbox-success-text">All metrics within acceptable thresholds</span>
           </div>
           ${this.renderReportGenerationControls()}
         </div>
@@ -1559,12 +1566,12 @@ export class VisualDashboard implements IVisualDashboard {
       <div class="blackbox-issues-section">
         <h3 class="blackbox-section-title">Issues Found</h3>
         <div class="blackbox-issues-list">
-          ${this.currentHealth.worstOffenders.map(issue => `
+          ${this.currentHealth?.worstOffenders?.map(issue => `
             <div class="blackbox-issue-item">
               <span class="blackbox-issue-icon">⚠️</span>
               <span class="blackbox-issue-text">${issue}</span>
             </div>
-          `).join('')}
+          `).join('') || ''}
         </div>
         ${this.renderReportGenerationControls()}
       </div>
@@ -1603,7 +1610,7 @@ export class VisualDashboard implements IVisualDashboard {
     const showChartsIcon = this.chartsVisible ? '📈' : '📊';
     
     return `
-      <div class="blackbox-actions-section">
+      <div class="blackbox-actions-section" style="display:none;">
         <div class="blackbox-action-buttons">
           <button class="blackbox-action-btn blackbox-btn-secondary" id="show-charts-btn">
             <span class="blackbox-btn-icon">${showChartsIcon}</span>
