@@ -1,11 +1,11 @@
 /**
- * Background service worker for the Page Health Analyzer extension
+ * Background service worker for the Blackbox extension
  * Handles extension lifecycle, tab management, and cross-component communication
  */
 
 // Extension installation and update handling
 chrome.runtime.onInstalled.addListener((details) => {
-  console.log('Page Health Analyzer installed/updated:', details.reason);
+  console.log('Blackbox installed/updated:', details.reason);
   
   if (details.reason === 'install') {
     // Set up default configuration on first install
@@ -14,11 +14,24 @@ chrome.runtime.onInstalled.addListener((details) => {
     // Handle extension updates
     console.log('Extension updated from version:', details.previousVersion);
   }
+  
+  // Create context menu (remove existing first to avoid duplicates)
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({
+      id: 'analyze-page-health',
+      title: 'Analyze with Blackbox',
+      contexts: ['page']
+    }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('Failed to create context menu:', chrome.runtime.lastError);
+      }
+    });
+  });
 });
 
 // Extension startup handling
 chrome.runtime.onStartup.addListener(() => {
-  console.log('Page Health Analyzer extension started');
+  console.log('Blackbox extension started');
 });
 
 // Tab update handling - inject content script when needed
@@ -34,15 +47,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleBackgroundMessage(message, sender, sendResponse);
   return true; // Keep the message channel open for async responses
-});
-
-// Context menu setup (optional feature)
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: 'analyze-page-health',
-    title: 'Analyze Page Health',
-    contexts: ['page']
-  });
 });
 
 // Context menu click handler
@@ -219,7 +223,7 @@ async function handleUpdateBadge(data: any, tabId?: number): Promise<void> {
     
     // Update title with score
     await chrome.action.setTitle({ 
-      title: `Page Health Analyzer - Score: ${score}/100 (${status})`,
+      title: `Blackbox - Score: ${score}/100 (${status})`,
       tabId 
     });
 
@@ -241,8 +245,8 @@ async function handleShowNotification(data: any): Promise<void> {
 
     await chrome.notifications.create({
       type: 'basic',
-      iconUrl: 'icon-48.png',
-      title: 'Page Health Analysis Complete',
+      iconUrl: 'assets/logo.png',
+      title: 'Blackbox Analysis Complete',
       message: `${domain}: ${status} (Score: ${score}/100)`
     });
 
@@ -337,7 +341,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
       // Ignore errors
     });
     chrome.action.setTitle({ 
-      title: 'Page Health Analyzer',
+      title: 'Blackbox',
       tabId 
     }).catch(() => {
       // Ignore errors
@@ -345,4 +349,4 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   }
 });
 
-console.log('Page Health Analyzer background service worker loaded');
+console.log('Blackbox background service worker loaded');

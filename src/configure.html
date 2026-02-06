@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackbox Configuration</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    body {
+      width: 600px;
+      min-height: 500px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .config-container {
+      padding: 20px;
+    }
+    
+    .config-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .config-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0;
+    }
+    
+    .back-button {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      color: #374151;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .back-button:hover {
+      background: #e5e7eb;
+    }
+    
+    .config-section {
+      margin-bottom: 20px;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .config-section h3 {
+      margin: 0 0 12px 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    
+    .config-field {
+      margin-bottom: 16px;
+    }
+    
+    .config-field:last-child {
+      margin-bottom: 0;
+    }
+    
+    .config-field label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #374151;
+      font-size: 14px;
+    }
+    
+    .config-field input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.2s ease;
+    }
+    
+    .config-field input:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+    
+    .config-field .help-text {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    
+    .config-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .config-btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid;
+    }
+    
+    .config-btn-primary {
+      background: #4a90e2;
+      color: white;
+      border-color: #4a90e2;
+    }
+    
+    .config-btn-primary:hover {
+      background: #357abd;
+      border-color: #357abd;
+    }
+    
+    .config-btn-secondary {
+      background: white;
+      color: #374151;
+      border-color: #d1d5db;
+    }
+    
+    .config-btn-secondary:hover {
+      background: #f3f4f6;
+    }
+    
+    .success-message {
+      background: #dcfce7;
+      color: #166534;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #00c851;
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="config-container">
+    <div class="config-header">
+      <h1 class="config-title">Configuration</h1>
+      <button class="back-button" id="back-to-popup">← Back to Dashboard</button>
+    </div>
+    
+    <div class="success-message" id="success-message">
+      Configuration saved successfully!
+    </div>
+    
+    <div class="config-section">
+      <h3>Performance Thresholds</h3>
+      <p style="color: #6b7280; font-size: 14px; margin-bottom: 16px;">
+        Configure the thresholds used to evaluate page performance. Values exceeding these thresholds will be flagged as warnings or failures.
+      </p>
+      
+      <div class="config-field">
+        <label for="pageSize">Page Size Threshold</label>
+        <input type="number" id="pageSize" step="0.1" min="0.1">
+        <div class="help-text">Maximum acceptable page size in megabytes (MB)</div>
+      </div>
+      
+      <div class="config-field">
+        <label for="loadTime">Load Time Threshold</label>
+        <input type="number" id="loadTime" step="0.1" min="0.1">
+        <div class="help-text">Maximum acceptable page load time in seconds</div>
+      </div>
+      
+      <div class="config-field">
+        <label for="ttfb">Time to First Byte (TTFB) Threshold</label>
+        <input type="number" id="ttfb" step="0.1" min="0.1">
+        <div class="help-text">Maximum acceptable time to first byte in seconds</div>
+      </div>
+    </div>
+    
+    <div class="config-actions">
+      <button class="config-btn config-btn-secondary" id="reset-config">Reset to Defaults</button>
+      <button class="config-btn config-btn-primary" id="save-config">Save Configuration</button>
+    </div>
+  </div>
+  
+  <script src="configure.js"></script>
+</body>
+</html>

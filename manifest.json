@@ -1,8 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "Page Health Analyzer",
-  "version": "1.0.2",
-  "description": "Analyze webpage performance health against configurable NFR thresholds",
+  "name": "Blackbox",
+  "version": "2.0.35",
+  "description": "Professional webpage performance analysis tool",
+  "icons": {
+    "16": "assets/logo.png",
+    "48": "assets/logo.png",
+    "128": "assets/logo.png"
+  },
   "permissions": [
     "activeTab",
     "storage",
@@ -12,7 +17,12 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Page Health Analyzer"
+    "default_title": "Blackbox",
+    "default_icon": {
+      "16": "assets/logo.png",
+      "48": "assets/logo.png",
+      "128": "assets/logo.png"
+    }
   },
   "content_scripts": [
     {

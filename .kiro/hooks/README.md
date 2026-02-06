@@ -1,4 +1,4 @@
-# Page Health Analyzer - Auto Version Bump Hook
+# Blackbox - Auto Version Bump Hook
 
 This directory contains an automated hook system that increments the Chrome extension version whenever tasks are completed in the project.
 

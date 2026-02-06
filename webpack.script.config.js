@@ -16,11 +16,20 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    fallback: {
+      // Chart.js compatibility for standalone script
+      'canvas': false,
+      // jsPDF compatibility for standalone script
+      'crypto': false,
+      'stream': false,
+      'util': false,
+      'buffer': false,
+    },
   },
   output: {
-    filename: 'page-health-analyzer.js',
+    filename: 'blackbox.js',
     path: path.resolve(__dirname, 'dist/script'),
-    library: 'PageHealthAnalyzer',
+    library: 'Blackbox',
     libraryTarget: 'umd',
     globalObject: 'this',
     clean: true,

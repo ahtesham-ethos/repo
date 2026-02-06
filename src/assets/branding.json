@@ -1,0 +1,11 @@
+{
+  "productName": "Blackbox",
+  "logoPath": "assets/logo.png",
+  "primaryColor": "#1a1a1a",
+  "secondaryColor": "#4a90e2",
+  "accentColor": "#00c851",
+  "warningColor": "#ffbb33",
+  "errorColor": "#ff4444",
+  "fontFamily": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  "description": "Professional webpage performance analysis tool"
+}

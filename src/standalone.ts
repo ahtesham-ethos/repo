@@ -1,2 +1,2 @@
 // Standalone injectable script - placeholder
-console.log('Page Health Analyzer standalone script loaded');
+console.log('Blackbox standalone script loaded');

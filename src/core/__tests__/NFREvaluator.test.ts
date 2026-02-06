@@ -277,7 +277,7 @@ describe('NFREvaluator', () => {
       expect(result.worstOffenders).toEqual(['All metrics within acceptable thresholds']);
     });
 
-    it('should return WARN status when some metrics warn but none fail', () => {
+    it('should return PASS status when overall score is good despite some warnings', () => {
       const results: HealthResult[] = [
         {
           metric: 'Page Size',
@@ -297,9 +297,34 @@ describe('NFREvaluator', () => {
 
       const result = evaluator.generateOverallHealth(results);
 
-      expect(result.status).toBe('WARN');
+      expect(result.status).toBe('PASS'); // Score 80 >= 70, so PASS
       expect(result.score).toBe(80); // (100 + 60) / 2 = 80
       expect(result.worstOffenders).toEqual(['Load Time: 6.00s (threshold: 5.00s)']);
+    });
+
+    it('should return WARN status when overall score is fair (50-69)', () => {
+      const results: HealthResult[] = [
+        {
+          metric: 'Page Size',
+          value: 1000000,
+          threshold: 2000000,
+          status: 'WARN',
+          message: '977 KB (threshold: 1953 KB)'
+        },
+        {
+          metric: 'Load Time',
+          value: 6000,
+          threshold: 5000,
+          status: 'WARN',
+          message: '6.00s (threshold: 5.00s)'
+        }
+      ];
+
+      const result = evaluator.generateOverallHealth(results);
+
+      expect(result.status).toBe('WARN'); // Score 60 < 70, so WARN
+      expect(result.score).toBe(60); // (60 + 60) / 2 = 60
+      expect(result.worstOffenders.length).toBeGreaterThan(0);
     });
 
     it('should return FAIL status when any metric fails', () => {

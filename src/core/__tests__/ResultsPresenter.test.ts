@@ -19,7 +19,7 @@ describe('ResultsPresenter', () => {
 
       const result = presenter.formatHealthSummary(health);
 
-      expect(result).toBe('✅ Excellent Performance (Score: 95/100)');
+      expect(result).toBe('✅ Good Performance (Score: 95/100)');
     });
 
     it('should format WARN status correctly', () => {
@@ -32,7 +32,7 @@ describe('ResultsPresenter', () => {
 
       const result = presenter.formatHealthSummary(health);
 
-      expect(result).toBe('⚠️ Performance Issues Detected (Score: 70/100)');
+      expect(result).toBe('⚠️ Fair Performance (Score: 70/100)');
     });
 
     it('should format FAIL status correctly', () => {
@@ -45,7 +45,7 @@ describe('ResultsPresenter', () => {
 
       const result = presenter.formatHealthSummary(health);
 
-      expect(result).toBe('❌ Critical Performance Problems (Score: 25/100)');
+      expect(result).toBe('❌ Poor Performance (Score: 25/100)');
     });
 
     it('should handle unknown status', () => {
@@ -626,7 +626,7 @@ describe('ResultsPresenter', () => {
       const healthStatus = container.querySelector('.health-status');
       expect(healthStatus).toBeTruthy();
       expect(healthStatus?.classList.contains('warn')).toBe(true);
-      expect(healthStatus?.textContent).toContain('Performance Issues Detected');
+      expect(healthStatus?.textContent).toContain('Fair Performance');
       expect(healthStatus?.textContent).toContain('Score: 75/100');
     });
 

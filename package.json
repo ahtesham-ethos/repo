@@ -1,7 +1,7 @@
 {
-  "name": "page-health-analyzer",
-  "version": "1.0.0",
-  "description": "A lightweight browser-based tool for analyzing webpage performance health against NFR thresholds",
+  "name": "blackbox",
+  "version": "2.0.0",
+  "description": "Professional webpage performance analysis tool for hackathon presentation",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode=production",
@@ -19,7 +19,8 @@
     "web-vitals",
     "browser-extension",
     "nfr",
-    "page-health"
+    "blackbox",
+    "hackathon"
   ],
   "author": "Hackathon Team",
   "license": "MIT",
@@ -37,5 +38,10 @@
     "typescript": "^5.3.3",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0"
   }
 }
