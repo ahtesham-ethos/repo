@@ -14,6 +14,19 @@ chrome.runtime.onInstalled.addListener((details) => {
     // Handle extension updates
     console.log('Extension updated from version:', details.previousVersion);
   }
+  
+  // Create context menu (remove existing first to avoid duplicates)
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({
+      id: 'analyze-page-health',
+      title: 'Analyze with Blackbox',
+      contexts: ['page']
+    }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('Failed to create context menu:', chrome.runtime.lastError);
+      }
+    });
+  });
 });
 
 // Extension startup handling
@@ -34,15 +47,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleBackgroundMessage(message, sender, sendResponse);
   return true; // Keep the message channel open for async responses
-});
-
-// Context menu setup (optional feature)
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: 'analyze-page-health',
-    title: 'Analyze with Blackbox',
-    contexts: ['page']
-  });
 });
 
 // Context menu click handler
