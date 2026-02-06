@@ -171,6 +171,32 @@ describe('VisualDashboard', () => {
       expect(loadingText?.textContent).toBe('Analyzing performance...');
     });
 
+    it('should render footer buttons during loading state', () => {
+      dashboard.showLoadingIndicator('Analyzing performance...');
+
+      // Check that footer buttons are rendered even during loading
+      const footerActions = containerElement.querySelector('.blackbox-footer-actions');
+      const analyzeBtn = containerElement.querySelector('#analyze-btn');
+      const saveProfileBtn = containerElement.querySelector('#save-profile-btn');
+      const viewProfilesBtn = containerElement.querySelector('#view-profiles-btn');
+      const configBtn = containerElement.querySelector('#config-btn');
+
+      expect(footerActions).toBeTruthy();
+      expect(analyzeBtn).toBeTruthy();
+      expect(saveProfileBtn).toBeTruthy();
+      expect(viewProfilesBtn).toBeTruthy();
+      expect(configBtn).toBeTruthy();
+
+      // Check that button icons are present
+      const analyzeBtnIcon = analyzeBtn?.querySelector('.blackbox-btn-icon');
+      const analyzeBtnText = analyzeBtn?.querySelector('.blackbox-btn-text');
+      
+      expect(analyzeBtnIcon).toBeTruthy();
+      expect(analyzeBtnIcon?.textContent).toBe('🔍');
+      expect(analyzeBtnText).toBeTruthy();
+      expect(analyzeBtnText?.textContent).toBe('Analyze Page');
+    });
+
     it('should hide loading indicator and render content', () => {
       dashboard.showLoadingIndicator('Loading...');
       dashboard.updateAnalysisResults(mockHealth, mockMetrics, mockThresholds);

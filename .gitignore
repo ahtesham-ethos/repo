@@ -50,3 +50,6 @@ pids
 # Temporary folders
 tmp/
 temp/
+
+# Kiro MCP settings (contains sensitive tokens)
+.kiro/settings/mcp.json

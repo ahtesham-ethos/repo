@@ -22,11 +22,16 @@ class PopupController {
    * Initialize event listeners for popup interactions
    */
   private initializeEventListeners(): void {
-    const analyzeBtn = document.getElementById('analyze-btn') as HTMLButtonElement;
-
-    if (analyzeBtn) {
-      analyzeBtn.addEventListener('click', () => this.handleAnalyzeClick());
-    }
+    // Use event delegation since the analyze button is dynamically created by VisualDashboard
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const analyzeBtn = target.closest('#analyze-btn');
+      
+      if (analyzeBtn) {
+        console.log('🔍 Analyze button clicked (delegated)');
+        this.handleAnalyzeClick();
+      }
+    });
 
     // Note: Configure button is now handled by VisualDashboard component
   }
@@ -526,7 +531,15 @@ class PopupController {
     const analyzeBtn = document.getElementById('analyze-btn') as HTMLButtonElement;
     if (analyzeBtn) {
       analyzeBtn.disabled = isAnalyzing;
-      analyzeBtn.textContent = isAnalyzing ? 'Analyzing...' : 'Analyze Page';
+      
+      // Update only the text span, not the entire button content (to preserve the icon)
+      const textSpan = analyzeBtn.querySelector('.blackbox-btn-text') as HTMLElement;
+      if (textSpan) {
+        textSpan.textContent = isAnalyzing ? 'Analyzing...' : 'Analyze Page';
+      } else {
+        // Fallback if the button structure is different (shouldn't happen with VisualDashboard)
+        analyzeBtn.textContent = isAnalyzing ? 'Analyzing...' : 'Analyze Page';
+      }
     }
   }
 

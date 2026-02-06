@@ -1322,6 +1322,8 @@ export class VisualDashboard implements IVisualDashboard {
       const target = event.target as HTMLElement;
       console.log('🖱️ Dashboard clicked:', target);
       
+      // Note: Analyze button is handled by popup.ts via document-level event delegation
+      
       // Handle show/hide charts button
       if (target.id === 'show-charts-btn' || target.closest('#show-charts-btn')) {
         console.log('📊 Show charts button clicked');
@@ -1463,6 +1465,9 @@ export class VisualDashboard implements IVisualDashboard {
         ` : ''}
       </div>
     `;
+    
+    // Render footer actions even during loading state
+    this.renderFooterActions();
   }
 
   /**
@@ -1479,6 +1484,9 @@ export class VisualDashboard implements IVisualDashboard {
         <div class="blackbox-empty-description">Click "Analyze Page" to start performance analysis</div>
       </div>
     `;
+    
+    // Render footer actions even in empty state
+    this.renderFooterActions();
   }
   /**
    * Render the complete analysis content
@@ -1795,20 +1803,71 @@ export class VisualDashboard implements IVisualDashboard {
     const footerActions = this.viewMode.containerElement.querySelector('.blackbox-footer-actions') as HTMLElement;
     if (!footerActions) return;
 
-    footerActions.innerHTML = `
-      <button class="blackbox-footer-btn blackbox-btn-primary" id="analyze-btn">
-        Analyze Page
-      </button>
-      <button class="blackbox-footer-btn blackbox-btn-secondary" id="save-profile-btn" title="Save current analysis as profile">
-        Save Profile
-      </button>
-      <button class="blackbox-footer-btn blackbox-btn-secondary" id="view-profiles-btn" title="View saved analysis profiles">
-        View Profiles
-      </button>
-      <button class="blackbox-footer-btn blackbox-btn-secondary" id="config-btn">
-        Configure
-      </button>
-    `;
+    // Create buttons with proper emoji rendering using Unicode
+    footerActions.innerHTML = '';
+    
+    // Analyze Page button - 🔍 (U+1F50D)
+    const analyzeBtn = this.createFooterButton(
+      'analyze-btn',
+      'blackbox-btn-analyze',
+      '\uD83D\uDD0D',
+      'Analyze Page',
+      'Analyze current page performance'
+    );
+    footerActions.appendChild(analyzeBtn);
+    
+    // Save Profile button - 💾 (U+1F4BE)
+    const saveBtn = this.createFooterButton(
+      'save-profile-btn',
+      'blackbox-btn-save',
+      '\uD83D\uDCBE',
+      'Save Profile',
+      'Save current analysis as profile'
+    );
+    footerActions.appendChild(saveBtn);
+    
+    // View Profiles button - 📊 (U+1F4CA)
+    const viewBtn = this.createFooterButton(
+      'view-profiles-btn',
+      'blackbox-btn-view',
+      '\uD83D\uDCCA',
+      'View Profiles',
+      'View saved analysis profiles'
+    );
+    footerActions.appendChild(viewBtn);
+    
+    // Configure button - ⚙️ (U+2699 U+FE0F)
+    const configBtn = this.createFooterButton(
+      'config-btn',
+      'blackbox-btn-config',
+      '\u2699\uFE0F',
+      'Configure',
+      'Configure thresholds and settings'
+    );
+    footerActions.appendChild(configBtn);
+  }
+
+  /**
+   * Create a footer button with proper emoji rendering
+   */
+  private createFooterButton(id: string, className: string, icon: string, text: string, title: string): HTMLButtonElement {
+    const button = document.createElement('button');
+    button.id = id;
+    button.className = `blackbox-footer-btn ${className}`;
+    button.title = title;
+    
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'blackbox-btn-icon';
+    iconSpan.textContent = icon;
+    
+    const textSpan = document.createElement('span');
+    textSpan.className = 'blackbox-btn-text';
+    textSpan.textContent = text;
+    
+    button.appendChild(iconSpan);
+    button.appendChild(textSpan);
+    console.log('footer button :', button);
+    return button;
   }
   /**
    * Apply dashboard-specific styles
@@ -1884,19 +1943,89 @@ export class VisualDashboard implements IVisualDashboard {
       .blackbox-footer-actions {
         display: flex;
         gap: 8px;
-        flex-direction: column;
+        flex-direction: row;
+        padding: 12px;
       }
 
       .blackbox-footer-btn {
         flex: 1;
-        padding: 8px 16px;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 12px 8px;
+        border: none;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         transition: all 0.2s ease;
+        min-width: 0;
+      }
+
+      .blackbox-btn-icon {
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      .blackbox-btn-text {
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+
+      .blackbox-btn-analyze {
+        background: #3b82f6;
+        color: white;
+      }
+
+      .blackbox-btn-analyze:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+      }
+
+      .blackbox-btn-save {
+        background: #10b981;
+        color: white;
+      }
+
+      .blackbox-btn-save:hover {
+        background: #059669;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+      }
+
+      .blackbox-btn-view {
+        background: #8b5cf6;
+        color: white;
+      }
+
+      .blackbox-btn-view:hover {
+        background: #7c3aed;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+      }
+
+      .blackbox-btn-config {
+        background: #6b7280;
+        color: white;
+      }
+
+      .blackbox-btn-config:hover {
+        background: #4b5563;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(107, 114, 128, 0.3);
+      }
+
+      .blackbox-footer-btn:active {
+        transform: translateY(0);
       }
 
       .blackbox-btn-primary {
@@ -2386,21 +2515,24 @@ export class VisualDashboard implements IVisualDashboard {
         font-size: 1.5rem;
         font-weight: 600;
         color: ${branding.primaryColor};
+        flex: 1;
       }
 
       .blackbox-back-btn {
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 8px 16px;
+        padding: 6px 12px;
         background: white;
         border: 1px solid #d1d5db;
         border-radius: 6px;
         cursor: pointer;
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         font-weight: 500;
         color: ${branding.primaryColor};
         transition: all 0.2s ease;
+        white-space: nowrap;
+        margin-left: auto;
       }
 
       .blackbox-back-btn:hover {
